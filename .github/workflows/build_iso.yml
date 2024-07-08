@@ -1,27 +1,51 @@
-name: Build ISOs
+name: Build ISO for Release v3.0.0
 
 on:
   workflow_dispatch:
   workflow_call:
 
 jobs:
-  build-iso-from-release:
+  build-iso:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     steps:
-      - name: Download v3.0.0 ISO
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Fetch Release Assets
+        id: fetch-release
+        uses: actions/download-artifact@v2
+        with:
+          name: v3.0.0
+          repository: pandalov3/bazzitegpdwin2
+          path: release_assets
+
+      - name: Build ISO
+        id: build
         run: |
-          wget https://github.com/pandalov3/bazzitegpdwin2/releases/download/v3.0.0/v3.0.0.iso -P ${{ github.workspace }}
+          # Example build command, adjust as per your repository's build process
+          cd release_assets
+          ./build.sh  # Replace with your actual build command
 
       - name: Move ISO to Upload Directory
+        id: upload-directory
         run: |
           ISO_UPLOAD_DIR=${{ github.workspace }}/upload
-          mkdir -p $ISO_UPLOAD_DIR
-          mv ${{ github.workspace }}/v3.0.0.iso $ISO_UPLOAD_DIR
+          mkdir -p ${ISO_UPLOAD_DIR}
+          mv ${{ steps.build.outputs.iso_path }}/${{ steps.build.outputs.iso_name }} ${ISO_UPLOAD_DIR}
+          mv ${{ steps.build.outputs.iso_path }}/${{ steps.build.outputs.iso_name }}-CHECKSUM ${ISO_UPLOAD_DIR}
           echo "iso-upload-dir=${ISO_UPLOAD_DIR}" >> $GITHUB_ENV
 
-      - name: Upload ISO to Job Artifacts
+      - name: Upload ISO to Artifacts
+        if: github.ref_name == 'testing'
         uses: actions/upload-artifact@v2
         with:
-          name: v3.0.0.iso
-          path: ${{ github.workspace }}/upload
-
+          name: bazzite-v3.0.0
+          path: ${{ steps.upload-directory.outputs.iso-upload-dir }}
+          if-no-files-found: error
+          retention-days: 0
+          compression-level: 0
+          overwrite: true
