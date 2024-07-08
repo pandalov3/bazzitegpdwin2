@@ -40,7 +40,6 @@ jobs:
           echo "iso-upload-dir=${ISO_UPLOAD_DIR}" >> $GITHUB_ENV
 
       - name: Upload ISO to Artifacts
-        if: github.ref_name == 'testing'
         uses: actions/upload-artifact@v2
         with:
           name: bazzite-v3.0.0
