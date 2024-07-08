@@ -20,20 +20,8 @@ jobs:
           echo "iso-upload-dir=${ISO_UPLOAD_DIR}" >> $GITHUB_ENV
 
       - name: Upload ISO to Job Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
           name: v3.0.0.iso
           path: ${{ github.workspace }}/upload
-          if-no-files-found: error
-          retention-days: 0
-          compression-level: 0
-          overwrite: true
-
-      - name: Upload ISO to R2
-        if: github.event_name == 'workflow_dispatch' && github.ref_name == 'main'
-        uses: apple/upload-to-r2-action@v1
-        with:
-          access-token: ${{ secrets.R2_ACCESS_TOKEN }}
-          file: ${{ github.workspace }}/upload/v3.0.0.iso
-          dest: bazzitegpdwin2
 
