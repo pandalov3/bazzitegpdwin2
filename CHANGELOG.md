@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.6.0](https://github.com/pandalov3/bazzitegpdwin2/compare/v3.5.1...v3.6.0) (2024-07-09)
+
+
+### Features
+
+* **deck:** Use Deck logo in logo menu by default on Valve hardware ([df41081](https://github.com/pandalov3/bazzitegpdwin2/commit/df41081f93fb00459c9eac42d84d605cca622b3e))
+* Reduce CPU & IO priority of updates from game mode ([9026ded](https://github.com/pandalov3/bazzitegpdwin2/commit/9026ded109cd2046872d7bc93932570342e6f38d))
+* **ujust:** Add install-resolve ([#1336](https://github.com/pandalov3/bazzitegpdwin2/issues/1336)) ([60e76d0](https://github.com/pandalov3/bazzitegpdwin2/commit/60e76d04f94f3794618215a65928f19ff1e1686a))
+
+
+### Bug Fixes
+
+* Add patch for color issues in the latest Mesa. ([69be913](https://github.com/pandalov3/bazzitegpdwin2/commit/69be913abe8def28eac6b6ed20bf5cbadf4627fb))
+* **Containerfile:** Correct regex when installing fsync kernel ([b24e44b](https://github.com/pandalov3/bazzitegpdwin2/commit/b24e44be7e5351e48472f5e47ad81d7ac2f79126))
+* **Containerfile:** Remove duplicate overrides for kernel modules ([9cc2c03](https://github.com/pandalov3/bazzitegpdwin2/commit/9cc2c03af4e57177d7edd44b8f3bfc4a993c61d2))
+* **deck:** Add patch to fix some invalid refresh rates (Thanks [@matte](https://github.com/matte)_schwartz) ([3ca09c5](https://github.com/pandalov3/bazzitegpdwin2/commit/3ca09c587dd596d0a9b9be7d60d33a9d82ff5fbb))
+* **deck:** Use older pattern matching for priv-write ([96431f3](https://github.com/pandalov3/bazzitegpdwin2/commit/96431f32711fed41a1f1c3361cd7855b15e1f5aa))
+* Make bazzite-tdpfix never run on deck hardware ([b2aa3b4](https://github.com/pandalov3/bazzitegpdwin2/commit/b2aa3b45baba2ce447a41e3c75fbd3ba17a6d4ee))
+
 ## [3.5.1](https://github.com/ublue-os/bazzite/compare/v3.5.0...v3.5.1) (2024-07-03)
 
 
